@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>Download</title>
+</head>
+<body>
+<script>
+  const params = new URLSearchParams(location.search);
+  const file = params.get("file");
+
+  if (!file || !/^[A-Za-z0-9._,-]+\.(mp3|wav)$/i.test(file)) {
+    document.body.textContent = "ファイルを確認できませんでした。";
+  } else {
+    const a = document.createElement("a");
+    a.href = "./" + file;
+    a.download = file;
+    document.body.appendChild(a);
+    a.click();
+
+    setTimeout(() => {
+      document.body.textContent =
+        "ダウンロードが始まらない場合は、こちらを押してください。";
+      a.textContent = "音声をダウンロード";
+      a.style.display = "block";
+    }, 500);
+  }
+</script>
+</body>
+</html>
